@@ -5,26 +5,43 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDto): Promise<Object> {
+    let result = {};
+    try {
+      await getRepository(User)
+        .save(createUserDto)
+        .then(res => {
+          result = {
+            status: 200,
+            message: "Termino correctamente.",
+            users: res
+          };
+        })
+    } catch (error) {
+      result = {
+        status: 400,
+        message: error
+      }
+      return result;
+    }
+    return result;
   }
 
-  async findAll() {
+  async findAll(): Promise<Object> {
     let result = {};
     try {
       await getRepository(User)
         .find()
         .then(res => {
           result = {
-            status: "Ok",
+            status: 200,
             message: "Termino correctamente.",
             users: res
           };
         });
     } catch (error) {
       result = {
-        status: "Fail",
+        status: 400,
         message: error
       }
       return result;
@@ -32,21 +49,21 @@ export class UsersService {
     return result;
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Object> {
     let result = {};
     try {
       await getRepository(User)
         .findOne(id)
         .then(res => {
           result = {
-            status: "Ok",
+            status: 200,
             message: "Termino correctamente.",
             users: res
           };
         });
     } catch (error) {
       result = {
-        status: "Fail",
+        status: 400,
         message: error
       }
       return result;
@@ -54,7 +71,7 @@ export class UsersService {
     return result;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<Object> {
     let result = {};
     try {
       await getRepository(User)
@@ -65,14 +82,14 @@ export class UsersService {
         .execute()
         .then(res => {
           result = {
-            status: "Ok",
+            status: 200,
             message: res,
             // users: res
           };
         });
     } catch (error) {
       result = {
-        status: "Fail",
+        status: 400,
         message: error
       }
       return result;
@@ -80,7 +97,29 @@ export class UsersService {
     return result;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number): Promise<Object> {
+    let result = {};
+    try {
+      await getRepository(User)
+        .createQueryBuilder()
+        .delete()
+        .from(User)
+        .where("id = :id", { id })
+        .execute()
+        .then(res => {
+          result = {
+            status: 200,
+            message: res,
+            // users: res
+          };
+        });
+    } catch (error) {
+      result = {
+        status: 400,
+        message: error
+      }
+      return result;
+    }
+    return result;
   }
 }
