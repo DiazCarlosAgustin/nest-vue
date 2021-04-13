@@ -70,6 +70,27 @@ export class UsersService {
     }
     return result;
   }
+  async findByEmail(email: string): Promise<Object> {
+    let result = {};
+    try {
+      await getRepository(User)
+        .findOne({ email: email })
+        .then(res => {
+          result = {
+            status: 200,
+            message: "Termino correctamente.",
+            user: res
+          };
+        });
+    } catch (error) {
+      result = {
+        status: 400,
+        message: error
+      }
+      return result;
+    }
+    return result;
+  }
 
   async update(id: number, updateUserDto: UpdateUserDto): Promise<Object> {
     let result = {};
