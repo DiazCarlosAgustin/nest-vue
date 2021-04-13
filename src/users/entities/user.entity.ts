@@ -1,9 +1,8 @@
 import { IsNumber, IsString, IsEmail, IsBoolean, IsDate } from "class-validator"
-import { PrimaryGeneratedColumn, Column, Entity, Unique, CreateDateColumn, UpdateDateColumn } from "typeorm"
-
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Unique, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm"
+import * as bcrypt from 'bcryptjs';
 @Entity()
-@Unique(["email"])
-export class User {
+export class User extends BaseEntity {
     @IsNumber()
     @PrimaryGeneratedColumn()
     id: number
@@ -17,7 +16,7 @@ export class User {
     last_name: string
 
     @IsEmail()
-    @Column()
+    @Column({ unique: true })
     email: string
 
     @IsString()
@@ -43,4 +42,8 @@ export class User {
     @IsDate()
     @UpdateDateColumn()
     updated_at: Date
+
+    async validatePassword(password: string): Promise<Boolean> {
+        return await bcrypt.compare(password, this.password)
+    }
 }
