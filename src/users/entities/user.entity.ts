@@ -1,5 +1,5 @@
 import { IsNumber, IsString, IsEmail, IsBoolean, IsDate } from "class-validator"
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Unique, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm"
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn } from "typeorm"
 import * as bcrypt from 'bcryptjs';
 @Entity()
 export class User extends BaseEntity {
