@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { CategoryModule } from './category/category.module';
+import { AdressesModule } from './adresses/adresses.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -24,7 +25,8 @@ import { CategoryModule } from './category/category.module';
     }),
     UsersModule,
     AuthModule,
-    CategoryModule
+    CategoryModule,
+    AdressesModule
   ],
   controllers: [AppController],
   providers: [AppService],
