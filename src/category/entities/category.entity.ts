@@ -14,7 +14,9 @@ export class Category {
 
     // crea la clave "foranea"
     @IsNumber()
-    @ManyToOne(type => Category, category => category.id)
+    @ManyToOne(type => Category, category => category.id, {
+        onDelete: "SET NULL"
+    })
     @JoinColumn({ name: 'id_parent' })
     id_parent: number
 
@@ -35,6 +37,6 @@ export class Category {
     public updated_at: Date
 
     // crea la relacion entre id(categoria) y id_parent(categoria)
-    @OneToMany(() => Category, category => category.id_parent)
+    @OneToMany(() => Category, category => category.id_parent, { cascade: true })
     parent: Category[]
 }
