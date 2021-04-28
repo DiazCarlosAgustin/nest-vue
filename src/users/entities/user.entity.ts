@@ -1,6 +1,7 @@
 import { IsNumber, IsString, IsEmail, IsBoolean, IsDate } from "class-validator"
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm"
 import * as bcrypt from 'bcryptjs';
+import { Address } from "src/addresses/entities/address.entity";
 @Entity()
 export class User extends BaseEntity {
     @IsNumber()
@@ -42,6 +43,9 @@ export class User extends BaseEntity {
     @IsDate()
     @UpdateDateColumn()
     updated_at: Date
+
+    @OneToMany(() => Address, address => address.id_user)
+    Address: Address[]
 
     async validatePassword(password: string): Promise<Boolean> {
         return await bcrypt.compare(password, this.password)

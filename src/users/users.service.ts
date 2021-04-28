@@ -19,14 +19,14 @@ export class UsersService {
         .save(createUserDto)
         .then(res => {
           result = {
-            status: 200,
+            status: "Ok",
             message: "Termino correctamente.",
             users: res
           };
         })
     } catch (error) {
       result = {
-        status: 400,
+        status: "Fail",
         message: error
       }
       return result;
@@ -41,14 +41,14 @@ export class UsersService {
         .find()
         .then(res => {
           result = {
-            status: 200,
+            status: "Ok",
             message: "Termino correctamente.",
             users: res
           };
         });
     } catch (error) {
       result = {
-        status: 400,
+        status: "Fail",
         message: error
       }
       return result;
@@ -63,14 +63,14 @@ export class UsersService {
         .findOne(id)
         .then(res => {
           result = {
-            status: 200,
+            status: "Ok",
             message: "Termino correctamente.",
             users: res
           };
         });
     } catch (error) {
       result = {
-        status: 400,
+        status: "Fail",
         message: error
       }
       return result;
@@ -84,14 +84,14 @@ export class UsersService {
         .findOne({ email: email })
         .then(res => {
           result = {
-            status: 200,
+            status: "Ok",
             message: "Termino correctamente.",
             user: res
           };
         });
     } catch (error) {
       result = {
-        status: 400,
+        status: "Fail",
         message: error
       }
       return result;
@@ -110,14 +110,14 @@ export class UsersService {
         .execute()
         .then(res => {
           result = {
-            status: 200,
+            status: "Ok",
             message: res,
             // users: res
           };
         });
     } catch (error) {
       result = {
-        status: 400,
+        status: "Fail",
         message: error
       }
       return result;
@@ -136,14 +136,14 @@ export class UsersService {
         .execute()
         .then(res => {
           result = {
-            status: 200,
+            status: "Ok",
             message: res,
             // users: res
           };
         });
     } catch (error) {
       result = {
-        status: 400,
+        status: "Fail",
         message: error
       }
       return result;

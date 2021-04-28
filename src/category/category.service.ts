@@ -17,7 +17,7 @@ export class CategoryService {
         .save(createCategoryDto)
         .then(res => {
           return {
-            status: "success",
+            status: "Ok",
             message: "La categoria se creo correctamente.",
             categoria: res
           }
@@ -40,7 +40,7 @@ export class CategoryService {
         .find({ relations: ['parent'] })
         .then(res => {
           return {
-            status: "success",
+            status: "Ok",
             categorias: res
           }
         })
@@ -66,7 +66,7 @@ export class CategoryService {
         })
         .then(res => {
           return {
-            status: "success",
+            status: "Ok",
             categorias: res
           }
         })
@@ -95,7 +95,7 @@ export class CategoryService {
         .then(res => {
           if (res.raw.warningStatus == 0 && res.raw.affectedRows > 0) {
             return {
-              status: "success",
+              status: "Ok",
               message: "Se Actualizo correctamente la categoria."
             }
           }
@@ -125,7 +125,7 @@ export class CategoryService {
         .then(res => {
           if (res.raw.warningStatus == 0 && res.raw.affectedRows > 0) {
             return {
-              status: "success",
+              status: "Ok",
               message: "Se elimino correctamente la categoria."
             }
           }
